@@ -36,7 +36,7 @@
 (require 'polymode)
 
 (defconst poly-vue-generic-head-regexp
-  (rx bol "<%s"
+  (rx bol "<template"
       (? (and (+ space)
               "lang="
               (any "\"'")
@@ -45,11 +45,17 @@
       (* space)
       ">" eol))
 
-(defconst poly-vue-template-head-regexp
-  (format poly-vue-generic-head-regexp "template"))
-
 (defconst poly-vue-script-head-regexp
-  (format poly-vue-generic-head-regexp "script"))
+  (rx bol "<script"
+      (? (and (+ space)
+              (? (and "setup" (+ space)))
+              "lang="
+              (any "\"'")
+              (group (+ (any alpha)))
+              (any "\"'")
+              (? (and (+ space) "setup"))))
+      (* space)
+      ">" eol))
 
 (defconst poly-vue-style-head-regexp
   (rx bol "<style"
