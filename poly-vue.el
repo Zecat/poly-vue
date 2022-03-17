@@ -35,7 +35,7 @@
 
 (require 'polymode)
 
-(defconst poly-vue-generic-head-regexp
+(defconst poly-vue-template-head-regexp
   (rx bol "<template"
       (? (and (+ space)
               "lang="
